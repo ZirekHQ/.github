@@ -8,7 +8,7 @@ first place.
 
 ### Screen readers
 
-- **[nvdaku](https://github.com/austek/nvdaku)** — Kurdish (Kurmanji) localisation
+- **[nvdaku](https://github.com/ZirekHQ/nvdaku)** — Kurdish (Kurmanji) localisation
   for the [NVDA](https://www.nvaccess.org/) screen reader: interface translation,
   character descriptions and a symbol dictionary. Dates from 2018 and is
   **partial** — see *Help wanted* below.
