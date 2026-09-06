@@ -6,6 +6,8 @@ on:
       PROJECT_SYNC_TOKEN:
         required: true
 
+permissions: {}
+
 env:
   PROJECT_NUMBER: "1"
   PROJECT_ID: "PVT_kwDOEp0X084BhJxz"
@@ -67,7 +69,12 @@ jobs:
             --single-select-option-id "$IN_PROGRESS_OPTION_ID"
 
   on-pr-opened:
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    # Fork PRs never receive repo secrets on `pull_request`, and this org's zizmor
+    # policy blanket-blocks `pull_request_target`; fork-originated PRs are
+    # skipped here rather than failing on an empty PROJECT_SYNC_TOKEN.
+    if: >-
+      github.event_name == 'pull_request' && github.event.action == 'opened' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Move closing-referenced issues to In Review
