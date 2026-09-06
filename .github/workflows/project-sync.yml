@@ -1,0 +1,124 @@
+name: Project sync (reusable)
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_SYNC_TOKEN:
+        required: true
+
+env:
+  PROJECT_NUMBER: "1"
+  PROJECT_ID: "PVT_kwDOEp0X084BhJxz"
+  STATUS_FIELD_ID: "PVTSSF_lADOEp0X084BhJxzzhgGnZo"
+  TODO_OPTION_ID: "f75ad846"
+  IN_PROGRESS_OPTION_ID: "47fc9ee4"
+  IN_REVIEW_OPTION_ID: "47a9f461"
+
+jobs:
+  on-issue-opened:
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to project and set Status Todo
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          set -euo pipefail
+          ITEM_ID=$(gh project item-add "$PROJECT_NUMBER" --owner ZirekHQ --url "$ISSUE_URL" --format json --jq '.id')
+          gh project item-edit \
+            --id "$ITEM_ID" \
+            --project-id "$PROJECT_ID" \
+            --field-id "$STATUS_FIELD_ID" \
+            --single-select-option-id "$TODO_OPTION_ID"
+
+  on-assigned:
+    if: github.event_name == 'issues' && github.event.action == 'assigned'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move assigned issue to In Progress
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          CONTENT_NODE_ID: ${{ github.event.issue.node_id }}
+        run: |
+          set -euo pipefail
+          ITEM_ID=$(gh api graphql -f query='
+            query($id: ID!) {
+              node(id: $id) {
+                ... on Issue {
+                  projectItems(first: 20) {
+                    nodes { id project { number } }
+                  }
+                }
+              }
+            }' -f id="$CONTENT_NODE_ID" \
+            --jq ".data.node.projectItems.nodes[] | select(.project.number == ${PROJECT_NUMBER}) | .id" \
+            | head -n1)
+
+          if [ -z "$ITEM_ID" ]; then
+            echo "::warning::No Project item found for issue $CONTENT_NODE_ID (project #$PROJECT_NUMBER); skipping."
+            exit 0
+          fi
+
+          gh project item-edit \
+            --id "$ITEM_ID" \
+            --project-id "$PROJECT_ID" \
+            --field-id "$STATUS_FIELD_ID" \
+            --single-select-option-id "$IN_PROGRESS_OPTION_ID"
+
+  on-pr-opened:
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move closing-referenced issues to In Review
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          OWNER="${REPO%%/*}"
+          NAME="${REPO##*/}"
+
+          ISSUE_IDS=$(gh api graphql -f query='
+            query($owner: String!, $name: String!, $number: Int!) {
+              repository(owner: $owner, name: $name) {
+                pullRequest(number: $number) {
+                  closingIssuesReferences(first: 20) {
+                    nodes { id }
+                  }
+                }
+              }
+            }' -f owner="$OWNER" -f name="$NAME" -F number="$PR_NUMBER" \
+            --jq ".data.repository.pullRequest.closingIssuesReferences.nodes[].id")
+
+          if [ -z "$ISSUE_IDS" ]; then
+            echo "This PR doesn't close any issue via a closing keyword; nothing to do."
+            exit 0
+          fi
+
+          for CONTENT_NODE_ID in $ISSUE_IDS; do
+            ITEM_ID=$(gh api graphql -f query='
+              query($id: ID!) {
+                node(id: $id) {
+                  ... on Issue {
+                    projectItems(first: 20) {
+                      nodes { id project { number } }
+                    }
+                  }
+                }
+              }' -f id="$CONTENT_NODE_ID" \
+              --jq ".data.node.projectItems.nodes[] | select(.project.number == ${PROJECT_NUMBER}) | .id" \
+              | head -n1)
+
+            if [ -z "$ITEM_ID" ]; then
+              echo "::warning::No Project item found for issue $CONTENT_NODE_ID (project #$PROJECT_NUMBER); skipping."
+              continue
+            fi
+
+            gh project item-edit \
+              --id "$ITEM_ID" \
+              --project-id "$PROJECT_ID" \
+              --field-id "$STATUS_FIELD_ID" \
+              --single-select-option-id "$IN_REVIEW_OPTION_ID"
+          done
