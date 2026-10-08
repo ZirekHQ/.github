@@ -1,0 +1,140 @@
+name: Announce release
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag, for example v1.2.3.
+        type: string
+        required: true
+      url:
+        description: Release page URL. Defaults to the release page of the tag in the calling repository.
+        type: string
+        default: ''
+      prerelease:
+        description: Skip the announcement when true.
+        type: boolean
+        default: false
+      announce-patch:
+        description: Announce patch releases (x.y.Z with Z above 0), which are skipped by default.
+        type: boolean
+        default: false
+    secrets:
+      MASTODON_INSTANCE_URL:
+        required: false
+      MASTODON_ACCESS_TOKEN:
+        required: false
+      BLUESKY_HANDLE:
+        required: false
+      BLUESKY_APP_PASSWORD:
+        required: false
+
+permissions: {}
+
+env:
+  PRERELEASE: ${{ inputs.prerelease }}
+  ANNOUNCE_PATCH: ${{ inputs.announce-patch }}
+  TAG: ${{ inputs.tag }}
+  URL: ${{ inputs.url || format('{0}/{1}/releases/tag/{2}', github.server_url, github.repository, inputs.tag) }}
+
+jobs:
+  plan:
+    name: Decide whether to announce
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      announce: ${{ steps.decide.outputs.announce }}
+    steps:
+      - name: Decide
+        id: decide
+        run: |
+          announce=true
+          if [ "$PRERELEASE" = true ]; then
+            announce=false; echo "::notice::Pre-release, skipping"
+          elif [ "$ANNOUNCE_PATCH" != true ] && [[ "$TAG" =~ ^v?[0-9]+\.[0-9]+\.([0-9]+)([-+].*)?$ ]] \
+            && (( 10#${BASH_REMATCH[1]} != 0 )); then
+            announce=false; echo "::notice::Patch release $TAG, skipping"
+          fi
+          echo "announce=$announce" >> "$GITHUB_OUTPUT"
+
+  mastodon:
+    name: Post to Mastodon
+    needs: plan
+    if: needs.plan.outputs.announce == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Post status
+        env:
+          MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+        run: |
+          [ -n "$MASTODON_INSTANCE_URL" ] && [ -n "$MASTODON_ACCESS_TOKEN" ] \
+            || { echo "::notice::Mastodon secrets not set, skipping"; exit 0; }
+          curl --fail-with-body --silent --show-error \
+            --request POST "${MASTODON_INSTANCE_URL%/}/api/v1/statuses" \
+            --header "Authorization: Bearer $MASTODON_ACCESS_TOKEN" \
+            --header "Idempotency-Key: release-${GITHUB_REPOSITORY}-${TAG}" \
+            --data-urlencode "status=${GITHUB_REPOSITORY#*/} $TAG released.
+          $URL" \
+            --data-urlencode "visibility=public" \
+            --output /dev/null
+
+  bluesky:
+    name: Post to Bluesky
+    needs: plan
+    if: needs.plan.outputs.announce == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Post status
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: |
+          [ -n "$BLUESKY_HANDLE" ] && [ -n "$BLUESKY_APP_PASSWORD" ] \
+            || { echo "::notice::Bluesky secrets not set, skipping"; exit 0; }
+          python3 - <<'PY'
+          import datetime, json, os, urllib.request
+
+          SERVICE = os.environ.get("BLUESKY_SERVICE", "https://bsky.social")
+
+
+          def call(method, body, token=None):
+              headers = {"Content-Type": "application/json"}
+              if token:
+                  headers["Authorization"] = f"Bearer {token}"
+              request = urllib.request.Request(
+                  f"{SERVICE}/xrpc/{method}", json.dumps(body).encode(), headers
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return json.load(response)
+
+
+          def record(text, url):
+              start = len(text.encode()) - len(url.encode())
+              facet = {
+                  "index": {"byteStart": start, "byteEnd": start + len(url.encode())},
+                  "features": [{"$type": "app.bsky.richtext.facet#link", "uri": url}],
+              }
+              now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+              return {"$type": "app.bsky.feed.post", "text": text, "facets": [facet], "createdAt": now}
+
+
+          def main():
+              env = os.environ
+              url = env["URL"]
+              text = f"{os.environ['GITHUB_REPOSITORY'].split('/')[1]} {env['TAG']} released.\n{url}"
+              session = call(
+                  "com.atproto.server.createSession",
+                  {"identifier": env["BLUESKY_HANDLE"], "password": env["BLUESKY_APP_PASSWORD"]},
+              )
+              call(
+                  "com.atproto.repo.createRecord",
+                  {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record(text, url)},
+                  session["accessJwt"],
+              )
+
+
+          main()
+          PY
