@@ -51,6 +51,8 @@ jobs:
           announce=true
           if [ "$PRERELEASE" = true ]; then
             announce=false; echo "::notice::Pre-release, skipping"
+          elif [[ "$TAG" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+- ]]; then
+            announce=false; echo "::notice::Pre-release tag $TAG, skipping"
           elif [ "$ANNOUNCE_PATCH" != true ] && [[ "$TAG" =~ ^v?[0-9]+\.[0-9]+\.([0-9]+)([-+].*)?$ ]] \
             && (( 10#${BASH_REMATCH[1]} != 0 )); then
             announce=false; echo "::notice::Patch release $TAG, skipping"
@@ -95,7 +97,7 @@ jobs:
           [ -n "$BLUESKY_HANDLE" ] && [ -n "$BLUESKY_APP_PASSWORD" ] \
             || { echo "::notice::Bluesky secrets not set, skipping"; exit 0; }
           python3 - <<'PY'
-          import datetime, json, os, urllib.request
+          import datetime, json, os, urllib.parse, urllib.request
 
           SERVICE = os.environ.get("BLUESKY_SERVICE", "https://bsky.social")
 
@@ -109,6 +111,15 @@ jobs:
               )
               with urllib.request.urlopen(request, timeout=30) as response:
                   return json.load(response)
+
+
+          def already_posted(did, text):
+              query = urllib.parse.urlencode(
+                  {"repo": did, "collection": "app.bsky.feed.post", "limit": 100, "reverse": "true"}
+              )
+              request = urllib.request.Request(f"{SERVICE}/xrpc/com.atproto.repo.listRecords?{query}")
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return any(r["value"].get("text") == text for r in json.load(response)["records"])
 
 
           def record(text, url):
@@ -129,6 +140,9 @@ jobs:
                   "com.atproto.server.createSession",
                   {"identifier": env["BLUESKY_HANDLE"], "password": env["BLUESKY_APP_PASSWORD"]},
               )
+              if already_posted(session["did"], text):
+                  print("::notice::Already announced on Bluesky, skipping")
+                  return
               call(
                   "com.atproto.repo.createRecord",
                   {"repo": session["did"], "collection": "app.bsky.feed.post", "record": record(text, url)},
