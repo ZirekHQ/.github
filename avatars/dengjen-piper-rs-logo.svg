@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Pipe with sound waves leaving its end">
+  <rect width="512" height="512" rx="96" fill="#0B0F19"/>
+  <rect x="64" y="220" width="290" height="72" rx="36" fill="#00D2FF"/>
+  <g fill="#0B0F19"><circle cx="150" cy="256" r="14"/><circle cx="210" cy="256" r="14"/><circle cx="270" cy="256" r="14"/></g>
+  <path d="M390 200Q424 256 390 312M434 160Q490 256 434 352" fill="none" stroke="#10B981" stroke-width="22" stroke-linecap="round"/>
+</svg>

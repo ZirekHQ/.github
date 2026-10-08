@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" font-family="DejaVu Sans, Verdana, sans-serif">
+  <rect width="1280" height="640" fill="#0B0F19"/>
+  <rect width="16" height="640" fill="#00D2FF"/>
+  <rect x="100" y="52" width="180" height="180" rx="34" fill="#16203a"/>
+  <svg x="100" y="52" width="180" height="180" viewBox="0 0 512 512">
+  <rect x="96" y="96" width="320" height="250" rx="40" fill="none" stroke="#00D2FF" stroke-width="24"/>
+  <path d="M256 346V416M188 416H324" stroke="#00D2FF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M170 224L236 290L344 168" fill="none" stroke="#10B981" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <text x="100" y="318" font-size="76" font-weight="700" fill="#f8fafc">nvda-addon-testkit</text>
+  <text x="100" y="378" font-size="34" fill="#cbd5e1">End-to-end tests for NVDA add-ons, in CI.</text>
+  <rect x="100" y="420" width="154" height="56" rx="12" fill="#00D2FF"/><text x="177.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">speech</text><rect x="274" y="420" width="171" height="56" rx="12" fill="#00D2FF"/><text x="359.5" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">braille</text><rect x="465" y="420" width="120" height="56" rx="12" fill="#00D2FF"/><text x="525.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">keys</text><rect x="605" y="420" width="154" height="56" rx="12" fill="#00D2FF"/><text x="682.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">config</text><rect x="779" y="420" width="103" height="56" rx="12" fill="#00D2FF"/><text x="830.5" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">log</text>
+  <text x="100" y="568" font-size="26" font-family="DejaVu Sans Mono, monospace" fill="#94a3b8">ZirekHQ/nvda-addon-testkit</text>
+  <text x="1180" y="568" font-size="26" text-anchor="end" fill="#94a3b8">GPL-2.0-or-later</text>
+</svg>

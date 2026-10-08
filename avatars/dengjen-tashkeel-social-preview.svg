@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" font-family="DejaVu Sans, Verdana, sans-serif">
+  <rect width="1280" height="640" fill="#0B0F19"/>
+  <rect width="16" height="640" fill="#00D2FF"/>
+  <rect x="100" y="52" width="180" height="180" rx="34" fill="#16203a"/>
+  <svg x="100" y="52" width="180" height="180" viewBox="0 0 512 512">
+  <path d="M116 230Q116 340 200 340H312Q396 340 396 230" fill="none" stroke="#10B981" stroke-width="40" stroke-linecap="round"/>
+  <circle cx="256" cy="410" r="24" fill="#10B981"/>
+  <path d="M196 168L316 130" stroke="#00D2FF" stroke-width="26" stroke-linecap="round"/></svg>
+  <text x="100" y="318" font-size="76" font-weight="700" fill="#f8fafc">dengjen-tashkeel</text>
+  <text x="100" y="378" font-size="34" fill="#cbd5e1">Arabic diacritics (tashkeel) with Rust and NLP models.</text>
+  <rect x="100" y="420" width="120" height="56" rx="12" fill="#00D2FF"/><text x="160.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">Rust</text><rect x="240" y="420" width="154" height="56" rx="12" fill="#00D2FF"/><text x="317.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">Python</text><rect x="414" y="420" width="103" height="56" rx="12" fill="#00D2FF"/><text x="465.5" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">C++</text><rect x="537" y="420" width="120" height="56" rx="12" fill="#00D2FF"/><text x="597.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">WASM</text>
+  <text x="100" y="568" font-size="26" font-family="DejaVu Sans Mono, monospace" fill="#94a3b8">ZirekHQ/dengjen-tashkeel</text>
+  <text x="1180" y="568" font-size="26" text-anchor="end" fill="#94a3b8">MIT OR Apache-2.0</text>
+</svg>

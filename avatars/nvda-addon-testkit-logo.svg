@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Monitor showing a check mark">
+  <rect width="512" height="512" rx="96" fill="#0B0F19"/>
+  <rect x="96" y="96" width="320" height="250" rx="40" fill="none" stroke="#00D2FF" stroke-width="24"/>
+  <path d="M256 346V416M188 416H324" stroke="#00D2FF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M170 224L236 290L344 168" fill="none" stroke="#10B981" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

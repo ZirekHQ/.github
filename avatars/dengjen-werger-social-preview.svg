@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" font-family="DejaVu Sans, Verdana, sans-serif">
+  <rect width="1280" height="640" fill="#0B0F19"/>
+  <rect width="16" height="640" fill="#00D2FF"/>
+  <rect x="100" y="52" width="180" height="180" rx="34" fill="#16203a"/>
+  <svg x="100" y="52" width="180" height="180" viewBox="0 0 512 512">
+  <path d="M120 86H290Q340 86 340 136V206Q340 256 290 256H200L130 312V256Q70 256 70 206V136Q70 86 120 86Z" fill="#00D2FF"/>
+  <path d="M222 256H392Q442 256 442 306V376Q442 426 392 426H382V482L300 426H222Q172 426 172 376V306Q172 256 222 256Z" fill="#10B981" stroke="#0B0F19" stroke-width="14"/>
+  <path d="M120 150H290M120 192H230" stroke="#0B0F19" stroke-width="18" stroke-linecap="round"/>
+  <path d="M222 320H392M222 362H330" stroke="#0B0F19" stroke-width="18" stroke-linecap="round"/></svg>
+  <text x="100" y="318" font-size="92" font-weight="700" fill="#f8fafc">dengjen-werger</text>
+  <text x="100" y="378" font-size="34" fill="#cbd5e1">Peer review and commitment for volunteer translation.</text>
+  <rect x="100" y="420" width="171" height="56" rx="12" fill="#00D2FF"/><text x="185.5" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">Crowdin</text><rect x="291" y="420" width="188" height="56" rx="12" fill="#00D2FF"/><text x="385.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">Kurmanji</text><rect x="499" y="420" width="154" height="56" rx="12" fill="#00D2FF"/><text x="576.0" y="457" text-anchor="middle" font-size="26" font-weight="700" fill="#0B0F19">review</text>
+  <text x="100" y="568" font-size="26" font-family="DejaVu Sans Mono, monospace" fill="#94a3b8">ZirekHQ/dengjen-werger</text>
+  <text x="1180" y="568" font-size="26" text-anchor="end" fill="#94a3b8">GPL-3.0-or-later</text>
+</svg>
