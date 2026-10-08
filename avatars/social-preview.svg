@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" font-family="DejaVu Sans, Verdana, sans-serif">
+  <rect width="1280" height="640" fill="#0B0F19"/>
+  <rect width="16" height="640" fill="#00D2FF"/>
+  <rect x="100" y="52" width="180" height="180" rx="34" fill="#16203a"/>
+  <svg x="100" y="52" width="180" height="180" viewBox="0 0 512 512"><path d="M139 158H340L189 352H390" fill="none" stroke="#00D2FF" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/><circle cx="376" cy="352" r="24" fill="#10B981"/></svg>
+  <text x="100" y="318" font-size="92" font-weight="700" fill="#f8fafc">Zirek</text>
+  <text x="100" y="378" font-size="34" fill="#cbd5e1">Speech and screen-reader software</text><text x="100" y="422" font-size="34" fill="#cbd5e1">for under-served languages.</text>
+  
+  <text x="100" y="568" font-size="26" font-family="DejaVu Sans Mono, monospace" fill="#94a3b8">zirekhq.github.io</text>
+  <text x="1180" y="568" font-size="26" text-anchor="end" fill="#94a3b8">github.com/ZirekHQ</text>
+</svg>
