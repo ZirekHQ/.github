@@ -13,7 +13,7 @@ to every repository that does not define its own. `profile/README.md` renders on
 | [`RELEASE_NOTES_STYLE.md`](RELEASE_NOTES_STYLE.md) | Release notes convention |
 | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Default issue forms |
 | [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) | Default pull request template |
-| [`.github/FUNDING.yaml`](.github/FUNDING.yaml) | Sponsor button |
+| [`.github/FUNDING.yml`](.github/FUNDING.yml) | Sponsor button |
 | [`avatars/`](avatars) | Logos, avatars and social-preview images |
 
 Changes here affect every repository in the organization. Open a pull request; `CODEOWNERS` requests review from
