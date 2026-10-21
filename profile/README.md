@@ -24,7 +24,7 @@ first place. Projects, releases and docs: [zirekhq.github.io](https://zirekhq.gi
 The stack underneath the add-on, all continuations of
 [Musharraf Omer's](https://github.com/mush42) work:
 
-- **[dengjen-tts](https://github.com/ZirekHQ/dengjen-tts)** ([overview](https://zirekhq.github.io/#dengjen-tts)) — cross-platform
+- **[dengjen](https://github.com/ZirekHQ/dengjen)** ([overview](https://zirekhq.github.io/#dengjen)) — cross-platform
   inference engine for neural TTS models (Rust), with pluggable backends
   (Piper, Kokoro). Includes the sentence segmentation that used to be a
   separate project (tqsm), tuned for speed over linguistic perfection —
