@@ -72,3 +72,10 @@ Open an issue on the relevant repository — for anything that sounds wrong,
 include the exact text and what it should sound like. See
 [CONTRIBUTING.md](https://github.com/ZirekHQ/.github/blob/main/CONTRIBUTING.md);
 you do not need to write code to help.
+
+### Support
+
+Zirek is maintained in spare time and paid for out of pocket. Donations through
+[Open Collective](https://opencollective.com/zirek) cover hosting, CI and test
+hardware, and every expense is public.
+
