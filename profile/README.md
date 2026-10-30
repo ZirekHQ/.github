@@ -76,6 +76,7 @@ you do not need to write code to help.
 ### Support
 
 Zirek is maintained in spare time and paid for out of pocket. Donations through
-[Open Collective](https://opencollective.com/zirek) cover hosting, CI and test
-hardware, and every expense is public.
+[Open Collective](https://opencollective.com/zirek) pay for compute, model
+training, dataset quality, testing hardware and contributor bounties, and every
+expense is public.
 
