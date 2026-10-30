@@ -25,14 +25,15 @@ The stack underneath the add-on, all continuations of
 [Musharraf Omer's](https://github.com/mush42) work:
 
 - **[dengjen](https://github.com/ZirekHQ/dengjen)** ([overview](https://zirekhq.github.io/#dengjen)) — cross-platform
-  inference engine for neural TTS models (Rust), with pluggable backends
-  (Piper, Kokoro). Includes the sentence segmentation that used to be a
+  inference engine for neural speech models (Rust): text to speech with
+  pluggable backends (Piper, Kokoro) and offline speech recognition. Includes the sentence segmentation that used to be a
   separate project (tqsm), tuned for speed over linguistic perfection —
   splitting text correctly is most of what makes synthesised speech sound
   unhurried.
 - **[dengjen-piper-rs](https://github.com/ZirekHQ/dengjen-piper-rs)** ([overview](https://zirekhq.github.io/#dengjen-piper-rs)) /
   **[dengjen-tts-go](https://github.com/ZirekHQ/dengjen-tts-go)** ([overview](https://zirekhq.github.io/#dengjen-tts-go)) — the Piper
-  backend crate, and Go bindings with prebuilt native binaries.
+  backend crate, and Go bindings for dengjen (speech synthesis and recognition)
+  with prebuilt native binaries.
 - **[dengjen-tashkeel](https://github.com/ZirekHQ/dengjen-tashkeel)** ([overview](https://zirekhq.github.io/#dengjen-tashkeel)) — diacritic
   restoration for Arabic. Arabic is normally written without the short vowels a
   synthesiser needs, so they have to be inferred before anything can be spoken.
