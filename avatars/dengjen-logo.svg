@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Lines of text on both sides of a sound wave">
+  <rect width="512" height="512" rx="96" fill="#0B0F19"/>
+  <path d="M96 176H126M96 256H126M96 336H112M416 176H386M416 256H386M416 336H400" stroke="#00D2FF" stroke-width="26" stroke-linecap="round"/>
+  <rect x="163" y="211.0" width="26" height="90" rx="13.0" fill="#10B981"/><rect x="203" y="181.0" width="26" height="150" rx="13.0" fill="#10B981"/><rect x="243" y="156.0" width="26" height="200" rx="13.0" fill="#10B981"/><rect x="283" y="181.0" width="26" height="150" rx="13.0" fill="#10B981"/><rect x="323" y="211.0" width="26" height="90" rx="13.0" fill="#10B981"/>
+</svg>
