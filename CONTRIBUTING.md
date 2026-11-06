@@ -37,7 +37,15 @@ else's work — append yourself rather than replacing them.
 3. Describe what you changed and how you verified it. For pronunciation
    changes, say which words you tested.
 
-Don't worry about commit message conventions; a clear description matters more.
+We squash-merge. The squash commit subject usually follows the PR title, but
+repository settings or the merger's edits can change it.
+Prefix the PR title with a type — `feat:`, `fix:`, `docs:`, `chore:`,
+`refactor:`, `test:` — as in [Conventional Commits](https://www.conventionalcommits.org/),
+for example `fix: stop clipping the last syllable`. It keeps release notes and
+`git log` readable. A repository's own `CONTRIBUTING.md` may add to this.
+
+The prefix is a recommendation: a PR without one is not rejected, and a
+maintainer may retitle it before merging. A clear description matters more.
 
 ## Licensing
 
