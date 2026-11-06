@@ -18,12 +18,16 @@ for a mispronunciation, what it should sound like.
 
 ## Translations
 
-Translation catalogues are gettext `.po` files. Edit them with a PO editor
-(Poedit, Lokalize, or `msgfmt`-aware tooling) rather than a plain text editor,
-so the metadata and plural forms stay intact.
+The NVDA add-ons are translated in the NVDA community's Crowdin project, not
+through pull requests. The steps to join are on the
+[Get involved](https://zirekhq.github.io/home/get-involved.html#_translate)
+page.
 
-Keep the existing `Last-Translator` and `Language-Team` attributions when you
-add to someone else's work — append yourself rather than replacing them.
+Where a repository holds gettext `.po` catalogues directly, edit them with a
+PO editor (Poedit, Lokalize, or `msgfmt`-aware tooling) rather than a plain text
+editor, so the metadata and plural forms stay intact. Keep the existing
+`Last-Translator` and `Language-Team` attributions when you add to someone
+else's work — append yourself rather than replacing them.
 
 ## Pull requests
 
