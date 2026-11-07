@@ -37,6 +37,9 @@ The stack underneath the add-on, all continuations of
 - **[dengjen-tashkeel](https://github.com/ZirekHQ/dengjen-tashkeel)** ([overview](https://zirekhq.github.io/#dengjen-tashkeel)) — diacritic
   restoration for Arabic. Arabic is normally written without the short vowels a
   synthesiser needs, so they have to be inferred before anything can be spoken.
+- **[voice-models](https://github.com/ZirekHQ/voice-models)** ([overview](https://zirekhq.github.io/#voice-models)) — training
+  recipes, the recording script and benchmarks for the Kurmanji voices dengjen
+  speaks with. Weights are published on Hugging Face.
 
 Kurmanji phoneme support is contributed upstream to
 [espeak-ng](https://github.com/espeak-ng/espeak-ng) rather than kept here, so it
@@ -59,7 +62,9 @@ reaches every project that uses it.
 Kurmanji is badly served by assistive technology, and most of the gap needs
 native speakers rather than programmers:
 
-- **Voice recordings** for text-to-speech training.
+- **Voice recordings** for text-to-speech training. The
+  [recording guide](https://zirekhq.github.io/voice-models/next/record-your-voice.html)
+  has the steps.
 
 Sorani and Zazaki speakers are just as welcome; the work is Kurmanji-first only
 because that is where it started.
