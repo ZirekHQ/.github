@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
 # Prints the next X.Y.Z version from the Conventional Commit subjects since the latest vX.Y.Z tag.
-# Exit 1: nothing release-worthy since that tag. With no vX.Y.Z tag yet, prints 1.0.0.
+# Exit 1: nothing release-worthy since that tag. Exit 2: the highest vX.Y.Z tag is not in HEAD's
+# history. With no vX.Y.Z tag yet, prints 1.0.0.
 # feat -> minor, `!` or a BREAKING CHANGE footer -> major, any other type that is not docs/chore/
 # style/refactor/test/ci/build/perf, or an unprefixed subject -> patch.
 set -euo pipefail
 
-last_tag="$(git tag --list 'v*' --merged HEAD --sort=-v:refname | grep -E '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$' | head -1 || true)"
-if [ -z "$last_tag" ]; then
+semver_tags() {
+  git tag --list 'v*' "$@" --sort=-v:refname | grep -E '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$' || true
+}
+
+highest_tag="$(semver_tags | head -1)"
+if [ -z "$highest_tag" ]; then
   echo "1.0.0"
   exit 0
+fi
+
+last_tag="$(semver_tags --merged HEAD | head -1)"
+if [ "$last_tag" != "$highest_tag" ]; then
+  echo "::error::${highest_tag} exists but is not in HEAD's history, so the next version could collide with it; repair the tag before releasing" >&2
+  exit 2
 fi
 
 version="${last_tag#v}"

@@ -58,9 +58,20 @@ jobs:
           git tag "v${VERSION}"
           git push origin "v${VERSION}"
 
+      # Runs on skipped pushes too, so a tag whose release creation failed is retried by the next
+      # push: that tag is then the version baseline and would otherwise never be published.
       - name: Publish GitHub release
-        if: steps.next.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.next.outputs.version }}
-        run: gh release create "v${VERSION}" --verify-tag --title "v${VERSION}" --generate-notes
+        run: |
+          set -euo pipefail
+          tag="${VERSION:+v${VERSION}}"
+          tag="${tag:-$(git tag --list 'v*' --merged HEAD --sort=-v:refname | head -1)}"
+          if [ -z "$tag" ]; then
+            echo "::notice::No release tag yet -- nothing to publish"
+          elif gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release ${tag} already exists"
+          else
+            gh release create "$tag" --verify-tag --title "$tag" --generate-notes
+          fi
