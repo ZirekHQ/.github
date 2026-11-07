@@ -1,0 +1,66 @@
+name: Release
+
+# Every merge to main that carries a release-worthy Conventional Commit (see
+# scripts/next-version.sh) is tagged vX.Y.Z and published as a GitHub release. Callers pin
+# `ZirekHQ/.github/...@<sha> # vX.Y.Z` to these tags, so a docs-only merge never moves them.
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Compute next version
+        id: next
+        run: |
+          set -uo pipefail
+          # `run:` steps execute as `bash -e {0}` regardless of `set` above -- a bare assignment
+          # would abort on next-version.sh's exit 1 before rc is ever inspected.
+          if version="$(bash scripts/next-version.sh)"; then
+            rc=0
+          else
+            rc=$?
+          fi
+          if [ "$rc" -eq 0 ]; then
+            echo "version=${version}" >> "$GITHUB_OUTPUT"
+          elif [ "$rc" -eq 1 ]; then
+            echo "::notice::Nothing release-worthy since the last tag -- skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::scripts/next-version.sh failed (exit ${rc})"
+            exit "$rc"
+          fi
+
+      - name: Push release tag
+        if: steps.next.outputs.skip != 'true'
+        env:
+          VERSION: ${{ steps.next.outputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
+
+      - name: Publish GitHub release
+        if: steps.next.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.next.outputs.version }}
+        run: gh release create "v${VERSION}" --verify-tag --title "v${VERSION}" --generate-notes
