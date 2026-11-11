@@ -74,8 +74,9 @@ On the synthesis side the shortage is different:
 - **Windows testers** for dengjen-nvda, especially against current NVDA releases.
 - **Co-maintainers.** The add-on has one maintainer, which is one too few.
 
-Open an issue on the relevant repository — for anything that sounds wrong,
-include the exact text and what it should sound like. See
+Ask questions and report words that sound wrong in
+[Discussions](https://github.com/orgs/ZirekHQ/discussions), in Kurmanji or English; include the exact text and what it
+should sound like. Open an issue on the relevant repository for bugs. See
 [CONTRIBUTING.md](https://github.com/ZirekHQ/.github/blob/main/CONTRIBUTING.md);
 you do not need to write code to help.
 
