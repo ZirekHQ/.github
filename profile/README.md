@@ -75,7 +75,7 @@ On the synthesis side the shortage is different:
 - **Co-maintainers.** The add-on has one maintainer, which is one too few.
 
 Ask questions and report words that sound wrong in
-[Discussions](https://github.com/orgs/ZirekHQ/discussions), in Kurmanji or English; include the exact text and what it
+[Discussions](https://github.com/ZirekHQ/ZirekHQ.github.io/discussions), in Kurmanji or English; include the exact text and what it
 should sound like. Open an issue on the relevant repository for bugs. [Contribute](https://zirekhq.github.io/home/contribute.html), in Kurmanji and
 English, shows where to start for each role; developers see
 [CONTRIBUTING.md](https://github.com/ZirekHQ/.github/blob/main/CONTRIBUTING.md).
