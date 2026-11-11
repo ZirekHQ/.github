@@ -1,5 +1,5 @@
 <!--
-Draft of the pinned welcome post for the organization's Discussions (ZirekHQ/.github#29).
+Draft of the pinned welcome post for Discussions, which live on ZirekHQ/ZirekHQ.github.io (ZirekHQ/.github#29).
 Post it in the Announcements category and pin it. A native speaker should check the Kurmanji first.
 -->
 

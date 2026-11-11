@@ -10,7 +10,7 @@ Start with the project documentation:
 
 ## Asking Questions
 
-Ask in [GitHub Discussions](https://github.com/orgs/ZirekHQ/discussions). It works in the browser, it's searchable, and you don't need to join a
+Ask in [GitHub Discussions](https://github.com/ZirekHQ/ZirekHQ.github.io/discussions). It works in the browser, it's searchable, and you don't need to join a
 mailing list. Pick the category that fits:
 - **Q&A:** questions about installing or using a tool, or about contributing.
 - **Pronunciation:** a Kurmanji word, number or abbreviation that sounds wrong. Write the exact text and how it

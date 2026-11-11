@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Ask a question
-    url: https://github.com/orgs/ZirekHQ/discussions/categories/q-a
+    url: https://github.com/ZirekHQ/ZirekHQ.github.io/discussions/categories/q-a
     about: Questions about installing, using or contributing. Kurmanji or English.
   - name: A word sounds wrong
-    url: https://github.com/orgs/ZirekHQ/discussions/categories/pronunciation
+    url: https://github.com/ZirekHQ/ZirekHQ.github.io/discussions/categories/pronunciation
     about: Tell us the exact text and how it should sound, in Kurmanji or English.
