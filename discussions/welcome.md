@@ -15,7 +15,7 @@ Ev der cihê pirs û nîqaşan e ji bo projeyên Zirek û dengê kurmancî Dengj
 - **Voices (Deng):** deng, tomarkirina dengê xwe û kalîteya dengan.
 - **Ideas (Raman):** pêşniyarên nû.
 
-Tu dikarî bi kurmancî an bi îngilîzî binivîsî. Ji kerema xwe re rêzê li hev bigire.
+Tu dikarî bi kurmancî an bi îngilîzî binivîsî. Ji kerema xwe re rêzê li hev bigire. Çewtî hîn jî wekî issue li depoya têkildar tên rapor kirin; ji bo raporên ewlehiyê [SECURITY.md](https://github.com/ZirekHQ/.github/blob/main/SECURITY.md) bişopîne.
 
 **English**
 
