@@ -11,7 +11,8 @@ to every repository that does not define its own. `profile/README.md` renders on
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting |
 | [`SUPPORT.md`](SUPPORT.md) | Where to get help |
 | [`RELEASE_NOTES_STYLE.md`](RELEASE_NOTES_STYLE.md) | Release notes convention |
-| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Default issue forms |
+| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE) | Default issue forms, and contact links to Discussions |
+| [`.github/DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE) | Forms for the organization's Discussions categories |
 | [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) | Default pull request template |
 | [`.github/FUNDING.yml`](.github/FUNDING.yml) | Sponsor button |
 | [`avatars/`](avatars) | Logos, avatars and social-preview images |

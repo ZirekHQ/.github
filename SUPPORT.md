@@ -10,9 +10,16 @@ Start with the project documentation:
 
 ## Asking Questions
 
-If you have questions about using a tool or library, or want advice on contributing:
-- Open an issue on the relevant repository if GitHub Discussions is not enabled.
-- If you aren't sure which repository is relevant, open an issue in [ZirekHQ/.github](https://github.com/ZirekHQ/.github/issues).
+Ask in [GitHub Discussions](https://github.com/orgs/ZirekHQ/discussions). It works in the browser, it's searchable, and you don't need to join a
+mailing list. Pick the category that fits:
+- **Q&A:** questions about installing or using a tool, or about contributing.
+- **Pronunciation:** a Kurmanji word, number or abbreviation that sounds wrong. Write the exact text and how it
+  should sound.
+- **Translation:** questions about translating the NVDA add-on or the apps.
+- **Voices:** the voices, recording your own voice, and voice quality.
+- **Ideas:** suggestions that aren't ready to be an issue yet.
+
+You can write in Kurmanji or English.
 
 ## Reporting Bugs or Requesting Features
 
